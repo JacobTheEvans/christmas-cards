@@ -1,0 +1,14 @@
+syntax = "proto3";
+package christmascard;
+
+service Christmascard {
+  rpc Acknowledge (AcknowledgeRequest) returns (AcknowledgeReply);
+}
+
+message AcknowledgeRequest {
+  string name = 1;
+}
+
+message AcknowledgeReply {
+  string message = 1;
+}
