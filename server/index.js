@@ -25,7 +25,8 @@ const client = new Client()
 function getServer () {
   const server = new grpc.Server()
   server.addService(christmascard.Christmascard.service, {
-    acknowledge: client.acknowledge
+    acknowledge: client.acknowledge,
+    getSlide: client.getSlide
   })
   return server
 }

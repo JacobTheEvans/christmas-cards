@@ -1,6 +1,27 @@
+const slides = [
+  {
+    title: 'hello',
+    text: 'here',
+    pictures: [ '1', '2', '3' ]
+  }
+]
+
 class Client {
   acknowledge (call, callback) {
     callback(null, { message: `Hello ${call.request.name}! Well to grpc-web!` })
+  }
+
+  getSlide (call, callback) {
+    const { index } = call.request
+    const slide = slides[index]
+    if (!slide) {
+      callback(Error(`Cannot find slide ${index}`))
+    } else {
+      callback(null, {
+        index,
+        config: JSON.stringify(slide)
+      })
+    }
   }
 }
 

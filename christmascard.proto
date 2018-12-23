@@ -3,6 +3,7 @@ package christmascard;
 
 service Christmascard {
   rpc Acknowledge (AcknowledgeRequest) returns (AcknowledgeReply);
+  rpc GetSlide (GetSlideRequest) returns (GetSlideReply);
 }
 
 message AcknowledgeRequest {
@@ -11,4 +12,13 @@ message AcknowledgeRequest {
 
 message AcknowledgeReply {
   string message = 1;
+}
+
+message GetSlideRequest {
+  int32 index = 1;
+}
+
+message GetSlideReply {
+  int32 index = 1;
+  string config = 2;
 }
