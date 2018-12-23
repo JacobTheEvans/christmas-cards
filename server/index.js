@@ -1,9 +1,12 @@
 
 const grpc = require('grpc')
 const protoLoader = require('@grpc/proto-loader')
+const pino = require('pino')
 const Client = require('./src/Client')
 
-const PROTO_PATH = `${__dirname}/../christmascard.proto`
+const PROTO_PATH = `./christmascard.proto`
+const log = pino()
+const port = 9090
 
 const packageDefinition = protoLoader.loadSync(
   PROTO_PATH,
@@ -16,19 +19,20 @@ const packageDefinition = protoLoader.loadSync(
   }
 )
 const protoDescriptor = grpc.loadPackageDefinition(packageDefinition)
-const todo = protoDescriptor.todo
+const christmascard = protoDescriptor.christmascard
 const client = new Client()
 
 function getServer () {
   const server = new grpc.Server()
-  server.addService(todo.Todo.service, {
+  server.addService(christmascard.Christmascard.service, {
     acknowledge: client.acknowledge
   })
   return server
 }
 
 const server = getServer()
-server.bind('0.0.0.0:9090', grpc.ServerCredentials.createInsecure())
+server.bind(`0.0.0.0:${port}`, grpc.ServerCredentials.createInsecure())
+log.info(`Starting server on ${port}`)
 server.start()
 
 exports.getServer = getServer

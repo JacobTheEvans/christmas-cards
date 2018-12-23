@@ -1,0 +1,26 @@
+version: '3'
+services:
+  enovoy:
+    image: christmascard/envoy
+    network_mode: "host"
+    ports:
+    - "8080:8080"
+  frontend:
+    image: christmascard/alpine-node:8.12.0
+    ports:
+      - "8081:8081"
+    depends_on:
+      - server
+    volumes:
+      - ./frontend:/app
+    working_dir: /app
+    command: npm run start
+  server:
+    ports:
+      - "9090:9090"
+    image: christmascard/alpine-node:8.12.0
+    volumes:
+      - ./server:/app
+      - ./christmascard.proto:/app/christmascard.proto
+    working_dir: /app
+    command: node ./

@@ -1,9 +1,9 @@
 import { AcknowledgeRequest } from './christmascard_pb.js'
-import { ChristmasCardClient } from './christmascard_grpc_web_pb.js'
+import { ChristmascardClient } from './christmascard_grpc_web_pb.js'
 
 class ChristmasCard {
   constructor () {
-    this._client = new ChristmasCardClient('http://localhost:8080')
+    this._client = new ChristmascardClient('http://localhost:8080')
   }
 
   start (name) {

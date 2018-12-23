@@ -25,6 +25,7 @@ class ChristmasCardContainer extends Component {
     const { message, err } = this.state
     return (
       <div>
+        <h1>App</h1>
         <p>{err && err.message}</p>
         <p>{message && message}</p>
       </div>

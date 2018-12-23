@@ -8,6 +8,7 @@
 
 # production
 build
+server/christmascard.proto
 
 # misc
 .DS_Store
