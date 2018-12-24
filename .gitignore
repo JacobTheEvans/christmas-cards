@@ -9,6 +9,8 @@
 # production
 build
 server/christmascard.proto
+frontend/static/*.jpg
+frontend/static/*.png
 
 # misc
 .DS_Store

@@ -2,16 +2,16 @@ syntax = "proto3";
 package christmascard;
 
 service Christmascard {
-  rpc Acknowledge (AcknowledgeRequest) returns (AcknowledgeReply);
+  rpc Metadata (MetadataRequest) returns (MetadataReply);
   rpc GetSlide (GetSlideRequest) returns (GetSlideReply);
 }
 
-message AcknowledgeRequest {
-  string name = 1;
+message MetadataRequest {
 }
 
-message AcknowledgeReply {
-  string message = 1;
+message MetadataReply {
+  int32 length = 1;
+  string author = 2;
 }
 
 message GetSlideRequest {

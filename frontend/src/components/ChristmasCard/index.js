@@ -1,60 +1,57 @@
 import React, { Component } from 'react'
 import ChristmasCard from '../../ChristmasCard'
+import { StoreContext } from '../../Store'
 
-class ChristmasCardContainer extends Component {
-  constructor () {
-    super()
-    this.state = {
-      message: '',
-      index: 0,
-      err: '',
-      christmasCard: new ChristmasCard()
-    }
-    this.handleClick = this.handleClick.bind(this)
-    this.handleReset = this.handleReset.bind(this)
-  }
+const christmasCard = new ChristmasCard()
 
+function ChristmasCardContainer () {
+  return (
+    <StoreContext.Consumer>
+      {({ setMeta, setSlide }) => (
+        <div style={{ display: 'none' }}>
+          <LoadMeta
+            christmasCard={christmasCard}
+            setMeta={setMeta}
+          />
+          <LoadSlide
+            christmasCard={christmasCard}
+            setSlide={setSlide}
+          />
+        </div>
+      )}
+    </StoreContext.Consumer>
+  )
+}
+
+class LoadMeta extends Component {
   async componentDidMount () {
-    const { christmasCard } = this.state
+    const { christmasCard, setMeta } = this.props
     try {
-      const message = await christmasCard.start('Jacob')
-      this.setState({ message })
+      const meta = await christmasCard.loadMeta('Jacob')
+      setMeta(meta)
     } catch (err) {
-      this.setState({ err })
-    }
-  }
-
-  async handleReset () {
-    const { christmasCard } = this.state
-    try {
-      const message = await christmasCard.getSlide(0)
-      this.setState({ message, index: 0 })
-    } catch (err) {
-      this.setState({ err })
-    }
-  }
-
-  async handleClick () {
-    const { christmasCard, index } = this.state
-    try {
-      const message = await christmasCard.getSlide(index + 1)
-      this.setState({ message, index: index + 1 })
-    } catch (err) {
-      this.setState({ err })
+      console.log('Failed to load application', err)
     }
   }
 
   render () {
-    const { message, err } = this.state
-    return (
-      <div>
-        <h1>App</h1>
-        <p>{err && err.message}</p>
-        <p>{message && JSON.stringify(message)}</p>
-        <button onClick={this.handleReset}>Restet</button>
-        <button onClick={this.handleClick}>Slide</button>
-      </div>
-    )
+    return false
+  }
+}
+
+class LoadSlide extends Component {
+  componentDidUpdate (prevProps) {
+    if (this.props.christmasCard &&
+      prevProps.index !== this.props.index
+    ) {
+      this.props.christmasCard.getSlide(this.props.index)
+      .then(slide => this.props.setSlide(slide))
+      .catch(err => console.log('Failed to load slide', err))
+    }
+  }
+
+  render () {
+    return false
   }
 }
 

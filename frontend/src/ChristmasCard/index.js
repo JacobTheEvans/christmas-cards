@@ -1,4 +1,4 @@
-import { AcknowledgeRequest, GetSlideRequest } from './christmascard_pb.js'
+import { MetadataRequest, GetSlideRequest } from './christmascard_pb.js'
 import { ChristmascardClient } from './christmascard_grpc_web_pb.js'
 
 class ChristmasCard {
@@ -6,15 +6,13 @@ class ChristmasCard {
     this._client = new ChristmascardClient('http://localhost:8080')
   }
 
-  start (name) {
+  loadMeta () {
     return new Promise((resolve, reject) => {
-      const request = new AcknowledgeRequest()
-      request.setName(name)
-
-      this._client.acknowledge(request, {}, (err, response) => {
+      const request = new MetadataRequest()
+      this._client.metadata(request, {}, (err, response) => {
         if (err) return reject(err)
-        const data = response.getMessage()
-        resolve(data)
+        const length = response.getLength()
+        resolve({ length })
       })
     })
   }
@@ -25,7 +23,6 @@ class ChristmasCard {
       request.setIndex(index)
 
       this._client.getSlide(request, {}, (err, response) => {
-        console.log(err)
         if (err) return reject(err)
         const data = response.getConfig()
         resolve(data)

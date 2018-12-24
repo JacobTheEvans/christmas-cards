@@ -7,8 +7,11 @@ const slides = [
 ]
 
 class Client {
-  acknowledge (call, callback) {
-    callback(null, { message: `Hello ${call.request.name}! Well to grpc-web!` })
+  metadata (call, callback) {
+    callback(null, {
+      length: slides.length,
+      author: 'Jacob Evans'
+    })
   }
 
   getSlide (call, callback) {
