@@ -15,6 +15,9 @@ const Container = styled.div`
   z-index: 2;
   right: 0px;
   bottom: 0px;
+  @media screen and (max-width: 950px) {
+    padding: 0px 5px;
+  }
 `
 const Button = styled.div`
   font-size: 3rem;
@@ -23,6 +26,7 @@ const Button = styled.div`
   display: flex;
   align-items: center;
   ${props => props.onlyOne ? `
+    margin-left: auto;
   ` : ''}
 `
 

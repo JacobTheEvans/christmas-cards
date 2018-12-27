@@ -1,0 +1,3 @@
+port: 9090
+protoPath: ./christmascard.proto
+cardConfigPath: ./card-config.yml

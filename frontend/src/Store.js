@@ -18,7 +18,6 @@ class StoreProvider extends Component {
   }
 
   setMeta (meta) {
-    console.log('Meta', meta)
     this.setState({ meta })
   }
 

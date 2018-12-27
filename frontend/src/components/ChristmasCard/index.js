@@ -7,13 +7,14 @@ const christmasCard = new ChristmasCard()
 function ChristmasCardContainer () {
   return (
     <StoreContext.Consumer>
-      {({ setMeta, setSlide }) => (
-        <div style={{ display: 'none' }}>
+      {({ setMeta, setSlide, index }) => (
+        <div>
           <LoadMeta
             christmasCard={christmasCard}
             setMeta={setMeta}
           />
           <LoadSlide
+            index={index}
             christmasCard={christmasCard}
             setSlide={setSlide}
           />
@@ -40,13 +41,29 @@ class LoadMeta extends Component {
 }
 
 class LoadSlide extends Component {
+  constructor () {
+    super()
+    this.handleUpdate = this.handleUpdate.bind(this)
+  }
+
+  componentDidMount () {
+    this.handleUpdate()
+  }
+
   componentDidUpdate (prevProps) {
-    if (this.props.christmasCard &&
-      prevProps.index !== this.props.index
-    ) {
-      this.props.christmasCard.getSlide(this.props.index)
-      .then(slide => this.props.setSlide(slide))
-      .catch(err => console.log('Failed to load slide', err))
+    const { index } = this.props
+    if (prevProps.index !== index) {
+      this.handleUpdate()
+    }
+  }
+
+  async handleUpdate () {
+    const { christmasCard, setSlide, index } = this.props
+    try {
+      const slide = await christmasCard.getSlide(index)
+      setSlide(JSON.parse(slide))
+    } catch (err) {
+      console.log('Failed to load slide', err)
     }
   }
 

@@ -9,6 +9,7 @@
 # production
 build
 server/christmascard.proto
+server/card-config.yml
 frontend/static/*.jpg
 frontend/static/*.png
 

@@ -26,6 +26,7 @@ services:
     volumes:
       - ./server:/app
       - ./christmascard.proto:/app/christmascard.proto
+      - ./card-config.yml:/app/card-config.yml
     working_dir: /app
     command: node ./
 networks:

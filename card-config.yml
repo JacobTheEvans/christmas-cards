@@ -1,0 +1,10 @@
+meta:
+  author: Your name
+  version: 1.0.0
+slides:
+  - type: text
+    title: Jacob's Christmas Card
+    textColor: '#fff'
+    backgroundColor: '#f44336'
+    text: >
+      Welcome to Christmascard application see README.md for gettings started
