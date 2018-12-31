@@ -49,6 +49,7 @@ const Text = styled.p`
   @media screen and (max-width: 950px) {
     width: 100%;
     margin-bottom: 50px;
+    order: 1;
   }
 `
 
@@ -56,6 +57,7 @@ const SideImages = styled.div`
   width: 63%;
   @media screen and (max-width: 950px) {
     width: 100%;
+    order: 2;
   }
 `
 

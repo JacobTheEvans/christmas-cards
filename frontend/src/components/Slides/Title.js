@@ -34,7 +34,7 @@ const MainHeader = styled.h1`
   margin: 0;
   color: ${({ color }) => color};
   @media screen and (max-width: 650px) {
-    font-size: 4.1rem;
+    font-size: 3rem;
   }
 `
 
@@ -43,13 +43,17 @@ const SubHeader = styled.h2`
   margin: 10px 0 0 0;
   color: ${({ color }) => color};
   @media screen and (max-width: 650px) {
-    font-size: 2.8rem;
+    font-size: 2.4rem;
   }
 `
 
 const SideImage = styled.img`
   width: 22rem;
   height: 22rem;
+  @media screen and (max-width: 650px) {
+    width: 10rem;
+    height: 10rem;
+  }
 `
 
 function Title ({
