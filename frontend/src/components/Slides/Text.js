@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import Typist from 'react-typist'
 
 const Content = styled.div`
   width: 100%;
@@ -45,7 +46,16 @@ function LeftTextRightPictures ({
 }) {
   return (
     <Content color={backgroundColor}>
-      <Header color={textColor}>{title}</Header>
+      <Header color={textColor}>
+        <Typist
+          startDelay={2850}
+          cursor={{
+            hideWhenDone: true
+          }}
+        >
+          {title}
+        </Typist>
+      </Header>
       <Text color={textColor}>
         {text}
       </Text>

@@ -36,6 +36,8 @@
     "http-server": "^0.11.1",
     "react-fontawesome": "^1.6.1",
     "react-grid-gallery": "^0.5.3",
+    "react-loading": "^2.0.3",
+    "react-typist": "^2.0.4",
     "styled-components": "^4.1.3"
   }
 }

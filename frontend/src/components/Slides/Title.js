@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import Typist from 'react-typist'
 
 const Content = styled.div`
   display: flex;
@@ -67,7 +68,16 @@ function Title ({
     <Content color={backgroundColor}>
       <Container>
         <InnerContainer>
-          <MainHeader color={textColor}>{title}</MainHeader>
+          <MainHeader color={textColor}>
+            <Typist
+              startDelay={2850}
+              cursor={{
+                hideWhenDone: true
+              }}
+            >
+              {title}
+            </Typist>
+          </MainHeader>
           <SubHeader color={textColor}>{subTitle}</SubHeader>
         </InnerContainer>
         <SideImage src={sideImage} />

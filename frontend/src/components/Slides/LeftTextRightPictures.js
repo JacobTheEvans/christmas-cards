@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Gallery from 'react-grid-gallery'
+import Typist from 'react-typist'
 import { setSelectedToFalse } from '../../utils'
 
 const Content = styled.div`
@@ -68,7 +69,16 @@ function LeftTextRightPictures ({
 }) {
   return (
     <Content color={backgroundColor}>
-      <Header color={textColor}>{title}</Header>
+      <Header color={textColor}>
+        <Typist
+          startDelay={2850}
+          cursor={{
+            hideWhenDone: true
+          }}
+        >
+          {title}
+        </Typist>
+      </Header>
       <Container>
         <Text color={textColor}>
           {text}

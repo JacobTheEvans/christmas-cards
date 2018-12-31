@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Gallery from 'react-grid-gallery'
+import Typist from 'react-typist'
 import { setSelectedToFalse } from '../../utils'
 
 const Content = styled.div`
@@ -52,7 +53,6 @@ const Text = styled.p`
     order: 1;
   }
 `
-
 const SideImages = styled.div`
   width: 63%;
   @media screen and (max-width: 950px) {
@@ -70,7 +70,16 @@ function LeftTextRightPictures ({
 }) {
   return (
     <Content color={backgroundColor}>
-      <Header color={textColor}>{title}</Header>
+      <Header color={textColor}>
+        <Typist
+          startDelay={2850}
+          cursor={{
+            hideWhenDone: true
+          }}
+        >
+          {title}
+        </Typist>
+      </Header>
       <Container>
         <SideImages>
           <Gallery

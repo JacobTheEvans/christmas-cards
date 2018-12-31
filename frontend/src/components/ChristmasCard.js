@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import ChristmasCard from '../../ChristmasCard'
-import { StoreContext } from '../../Store'
+import ChristmasCard from '../ChristmasCard'
+import { StoreContext } from '../Store'
 
 const christmasCard = new ChristmasCard()
 
