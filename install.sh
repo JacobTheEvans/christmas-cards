@@ -15,3 +15,6 @@ docker run --rm -v "$(pwd):/app" \
 -w /app/server \
 "christmascard/alpine-node:8.12.0" ash -c \
 "yarn install"
+
+
+./build.sh

@@ -9,15 +9,11 @@ services:
     - "80:80"
   frontend:
     hostname: frontend
-    image: christmascard/alpine-node:8.12.0
+    image: christmascard/frontend
     networks:
       - service
     depends_on:
       - server
-    volumes:
-      - ./frontend:/app
-    working_dir: /app
-    command: npm run start
   server:
     hostname: server
     image: christmascard/alpine-node:8.12.0

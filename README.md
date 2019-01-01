@@ -20,8 +20,7 @@ If you would like to use this project first run the following:
 This installs all the required dependencies in order to run this project. That
 includes required docker images and node_modules.
 
-If you would like to rebuild the frontend src then run
-the following:
+*Optional*: If you would like to rebuild the frontend container run the following script
 
 ```bash
 ./build.sh

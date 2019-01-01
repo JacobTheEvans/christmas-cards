@@ -70,4 +70,4 @@ static_resources:
     connect_timeout: 0.25s
     type: strict_dns
     lb_policy: round_robin
-    hosts: [{ socket_address: { address: frontend, port_value: 8081 }}]
+    hosts: [{ socket_address: { address: frontend, port_value: 80 }}]

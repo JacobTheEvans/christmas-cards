@@ -9,7 +9,7 @@ const config = {
   resolve: {
     extensions: ['.js', '.jsx', '.css']
   },
-  watch: true,
+  watch: false,
   module: {
     rules: [
       {
