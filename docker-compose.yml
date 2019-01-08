@@ -23,8 +23,22 @@ services:
       - ./server:/app
       - ./christmascard.proto:/app/christmascard.proto
       - ./card-config.yml:/app/card-config.yml
+    environment:
+      PGHOST: database
+      PGUSER: christmas
+      PGDATABASE: christmas
+      PGPASSWORD: christmas
+      PGPORT: 5432
     working_dir: /app
     command: node ./
+  database:
+    image: postgres:11.1-alpine
+    hostname: database
+    networks:
+      - service
+    environment:
+      POSTGRES_USER: christmas
+      POSTGRES_PASSWORD: christmas
 networks:
   service:
     external: false

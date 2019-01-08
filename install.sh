@@ -18,3 +18,4 @@ docker run --rm -v "$(pwd):/app" \
 
 
 ./build.sh
+./server/generate-jwt-key.sh

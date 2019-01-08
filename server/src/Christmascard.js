@@ -13,10 +13,12 @@ class ChristmasCard {
 
   _loadConfig () {
     try {
+      this._log.info('Loading in card-config file...')
       const rawFile = fs.readFileSync(this._configPath, 'utf8')
       const config = yaml.safeLoad(rawFile)
       this._meta = config.meta
       this._slides = config.slides
+      this._log.info('Card-config loaded')
     } catch (err) {
       this._log.error(err, 'Error when loading card-config file')
       process.exit(1)
@@ -24,6 +26,7 @@ class ChristmasCard {
   }
 
   metadata (call, callback) {
+    this._log.info(call, 'Metadata')
     callback(null, {
       length: this._slides.length,
       author: this._meta.author
@@ -31,6 +34,7 @@ class ChristmasCard {
   }
 
   getSlide (call, callback) {
+    this._log.info(call, 'getSlide')
     const { index } = call.request
     const slide = this._slides[index]
     if (!slide) {

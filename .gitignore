@@ -10,6 +10,8 @@
 build
 server/christmascard.proto
 server/card-config.yml
+server/keys/*.rsa
+server/keys/*.pub
 frontend/static/*.jpg
 frontend/static/*.png
 
