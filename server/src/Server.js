@@ -4,6 +4,7 @@ const protoLoader = require('@grpc/proto-loader')
 const pino = require('pino')
 const yaml = require('js-yaml')
 const fs = require('fs')
+const Db = require('./Db')
 const Auth = require('./Auth')
 const Christmascard = require('./Christmascard')
 
@@ -11,8 +12,9 @@ class Server {
   constructor () {
     this._log = pino()
     this._loadConfig()
-    this._christmascard = new Christmascard(this._config.cardConfigPath)
+    this._db = new Db()
     this._auth = new Auth(this._config)
+    this._christmascard = new Christmascard(this._config.cardConfigPath)
     this._configureGrpc()
   }
 
@@ -56,7 +58,8 @@ class Server {
     return server
   }
 
-  start () {
+  async start () {
+    await this._db.start()
     this._server = this.getServer()
     this._server.bind(`0.0.0.0:${this._config.port}`, grpc.ServerCredentials.createInsecure())
     this._log.info(`Starting grpc server on ${this._config.port}`)
