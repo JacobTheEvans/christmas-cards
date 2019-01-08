@@ -6,6 +6,8 @@ cd $(dirname `[[ $0 = /* ]] && echo "$0" || echo "$PWD/${0#./}"`)
 
 NODE_VERSION=8.12.0 ./build-tools/alpine-node/ensure.sh
 
+./build-tools/proto-builder/ensure.sh
+
 docker run --rm -v "$(pwd):/app" \
 -w /app/frontend \
 "christmascard/alpine-node:8.12.0" ash -c \
@@ -15,7 +17,6 @@ docker run --rm -v "$(pwd):/app" \
 -w /app/server \
 "christmascard/alpine-node:8.12.0" ash -c \
 "yarn install"
-
 
 ./build.sh
 ./server/generate-jwt-key.sh
