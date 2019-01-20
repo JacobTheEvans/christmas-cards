@@ -1,0 +1,11 @@
+application:
+  protoPath: PROTO_PATH
+  cardConfigPath: CARD_CONFIG_PATH
+  privateKeyPath: PRIVATE_KEY_PATH
+  publicKeyPath: PUBLIC_KEY_PATH
+  issuer: JWT_ISSUER
+  hostname: HOSTNAME
+  restServerPort:  REST_PORT
+  grpcServerPort: GRPC_PORT
+  username: USERNAME
+  password: PASSWORD

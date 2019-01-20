@@ -2,38 +2,22 @@
 const grpc = require('grpc')
 const protoLoader = require('@grpc/proto-loader')
 const pino = require('pino')
-const yaml = require('js-yaml')
-const fs = require('fs')
-const Db = require('./Db')
+const config = require('config')
 const Auth = require('./Auth')
 const Christmascard = require('./Christmascard')
 
-class Server {
+class GrpcServer {
   constructor () {
     this._log = pino()
-    this._loadConfig()
-    this._db = new Db()
-    this._auth = new Auth(this._config)
-    this._christmascard = new Christmascard(this._config.cardConfigPath)
+    this._auth = Auth.init()
+    this._christmascard = new Christmascard()
     this._configureGrpc()
-  }
-
-  _loadConfig () {
-    try {
-      this._log.info('Loading in config file...')
-      const rawFile = fs.readFileSync('./config.yml', 'utf8')
-      this._config = yaml.safeLoad(rawFile)
-      this._log.info('Config file loaded')
-    } catch (err) {
-      this._log.error(err, 'Error when loading config file')
-      process.exit(1)
-    }
   }
 
   _configureGrpc () {
     this._log.info('Configuring grpc server...')
     const packageDefinition = protoLoader.loadSync(
-      this._config.protoPath,
+      config.get('application.protoPath'),
       {
         keepCase: true,
         longs: String,
@@ -59,13 +43,19 @@ class Server {
   }
 
   async start () {
-    await this._db.start()
     this._server = this.getServer()
-    this._server.bind(`0.0.0.0:${this._config.port}`, grpc.ServerCredentials.createInsecure())
-    this._log.info(`Starting grpc server on ${this._config.port}`)
+    this._server.bind(
+      `0.0.0.0:${config.get('application.grpcServerPort')}`,
+      grpc.ServerCredentials.createInsecure()
+    )
+    this._log.info(
+      `Starting grpc server on ${config.get('application.grpcServerPort')}`
+    )
     this._server.start()
-    this._log.info(`Grpc server started on ${this._config.port}`)
+    this._log.info(
+      `Grpc server started on ${config.get('application.grpcServerPort')}`
+    )
   }
 }
 
-module.exports = Server
+module.exports = GrpcServer

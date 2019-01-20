@@ -1,5 +1,10 @@
-const Server = require('./src/Server')
-const server = new Server()
-server.start()
+const RestServer = require('./src/RestServer')
+const GrpcServer = require('./src/GrpcServer')
 
-exports.getServer = server.getServer
+const restServer = new RestServer()
+restServer.start()
+
+const grpcServer = new GrpcServer()
+grpcServer.start()
+
+exports.getServer = grpcServer.getServer

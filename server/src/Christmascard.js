@@ -1,11 +1,11 @@
 const yaml = require('js-yaml')
 const fs = require('fs')
 const pino = require('pino')
+const config = require('config')
 
 class ChristmasCard {
-  constructor (configPath) {
+  constructor () {
     this._log = pino()
-    this._configPath = configPath
     this._loadConfig()
     this.metadata = this.metadata.bind(this)
     this.getSlide = this.getSlide.bind(this)
@@ -14,10 +14,10 @@ class ChristmasCard {
   _loadConfig () {
     try {
       this._log.info('Loading in card-config file...')
-      const rawFile = fs.readFileSync(this._configPath, 'utf8')
-      const config = yaml.safeLoad(rawFile)
-      this._meta = config.meta
-      this._slides = config.slides
+      const rawFile = fs.readFileSync(config.get('application.cardConfigPath'), 'utf8')
+      const cardConfig = yaml.safeLoad(rawFile)
+      this._meta = cardConfig.meta
+      this._slides = cardConfig.slides
       this._log.info('Card-config loaded')
     } catch (err) {
       this._log.error(err, 'Error when loading card-config file')

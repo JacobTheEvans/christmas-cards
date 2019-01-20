@@ -1,0 +1,11 @@
+application:
+  protoPath: ./christmascard.proto
+  cardConfigPath: ./card-config.yml
+  privateKeyPath: ./keys/jwt.rsa
+  publicKeyPath: ./keys/jwt.rsa.pub
+  issuer: christmascard-server
+  hostname: localhost
+  restServerPort:  8080
+  grpcServerPort: 9090
+  username: admin
+  password: admin
